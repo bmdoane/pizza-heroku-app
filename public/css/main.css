@@ -1,0 +1,44 @@
+body {
+	background-color: lightblue;
+}
+
+/* Index page */
+.welcome {
+	margin-top: 100px;
+	text-align: center;
+	border: 1px solid black;
+}
+
+.welcomeHeader {
+	color: red;
+}
+
+.welcomeImage {
+	margin: auto;
+  padding: 50px;
+}
+
+
+/* About */
+.heading {
+	margin-top: 100px;
+	text-align: center;
+}
+
+.content {
+	padding: 50px;
+	text-align: justify;
+}
+
+
+/* Contact page */
+.contactHeading h1 {
+	margin-top: 100px;
+	text-align: center;
+}
+
+.formField {
+	border: 2px solid green;
+	border-radius: 10px;
+}
+
