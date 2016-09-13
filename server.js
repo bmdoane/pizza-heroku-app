@@ -5,6 +5,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const chalk = require('chalk')
 const routes = require('./routes/') // same as ./routes/index.js
+const { connect } = require('./database')
+
+//const MONGODB_URL = 'mongodb://localhost:27017/roadkillpizza'
 
 // Initialize
 const app = express()
@@ -73,6 +76,10 @@ app.use((err, req, res, next) => {
 
 
 // Listen to requests on the provided port and log when available
-app.listen(port, () => {
-	console.log(`Listening on port: ${port}`)
-})
+connect()
+	.then(() => {
+		app.listen(port, () =>
+			console.log(`Listening on port: ${port}`)
+		)
+	})
+	.catch(console.error)
