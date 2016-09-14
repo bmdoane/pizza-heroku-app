@@ -6,5 +6,5 @@ module.exports = mongoose.model('Order', {
 	name: String,
 	email: String,
 	phone: String,
-	size: number
+	size: Number,
 })
