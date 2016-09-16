@@ -2,28 +2,16 @@
 
 const { connect, disconnect } = require('./database')
 
-const Size = require('./models/size')
-//const Topping = require('./models/topping')
-const toppings = require('./topppings') //JSON option
+const Size = require('../models/size')
+const sizes = require('./sizes')
+
+const Topping = require('../models/topping')
+const toppings = require('./toppings')
 
 connect()
   // This keeps from duplicating data
 	.then(() => Size.remove({}))
-	.then(() => 
-		Size.insertMany([{
-			name: 'Small',
-			inches: 10,
-		},{
-			name: 'Medium',
-			inches: 12,			
-		},{
-			name: 'Large',
-			inches: 14,				
-		},{
-			name: 'Murica',
-			inches: 50,
-		}])
-	)
+	.then(() => Size.insertMany(sizes)
 	.then(() => Topping.remove({}))
 	.then(() => Topping.insertMany(toppings)
 	.then(disconnect)

@@ -24,6 +24,8 @@ if (process.env.Node_ENV !== 'production') {
 }
 
 app.locals.company = 'Road Kill Pizza'
+app.locals.errors = {} // errors & body added to avoid guard statements
+app.locals.body = {} // i.e. value=(body && body.name) vs. value=body.name
 
 // middlewares
 // User agents - using methods on req object
@@ -39,29 +41,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // routes
 app.use(routes)
-// app.get('/', (req, res) => {
-// 	// const x = 'y'
-// 	// x = 'z' 
-// 	res.render('index', { page: 'Home'})
-// })
-
-// app.get('/about', (req, res) => {
-//   res.render('about', { page: 'About'})
-// })	
-
-// app.get('/contact', (req, res) => {
-//   res.render('contact', { page: 'Contact'})
-// })
-
-// app.post('/contact', (req, res) => {
-// 	console.log(req.body)
-// 	res.redirect('/')
-// })
-
-// Not needed
-// app.get('/404', (req, res) => {
-// 	res.render('404')
-// })
 
 // 404 catch and forward to error handler
 app.use((req, res) => {
