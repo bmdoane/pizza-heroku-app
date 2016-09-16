@@ -7,9 +7,13 @@
     "node": "6"
   },
   "scripts": {
+    "db:seed": "node db/seed.js",
+    "deploy": "git push heroku master",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "postinstall": "bower install"
+    "postinstall": "bower install",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",    
   },
   "keywords": [],
   "author": "",
