@@ -5,7 +5,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const chalk = require('chalk')
 const routes = require('./routes/') // same as ./routes/index.js
-const { connect } = require('./database')
+const { connect } = require('./db/database')
 
 //const MONGODB_URL = 'mongodb://localhost:27017/roadkillpizza'
 
