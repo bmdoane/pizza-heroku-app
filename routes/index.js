@@ -64,4 +64,28 @@ router.post('/order', (req, res, err) => {
     .catch(err)
 })
 
+router.get('/login', (req, res) =>
+  res.render('login')
+)
+
+router.post('/login', (req, res) => {
+  if(req.body.password === 'password') {
+    res.redirect('/')
+  } else {
+    res.render('login', { error: `Email and password combination do not match`})
+  }
+})
+
+router.get('/register', (req, res) =>
+  res.render('register')
+)
+
+router.post('/register', (req, res) => {
+  if(req.body.password === req.body.confirmation) {
+    res.redirect('/')
+  } else {
+    res.render('register', { error: `Password and password combination do not match`})
+  }
+})
+
 module.exports = router
