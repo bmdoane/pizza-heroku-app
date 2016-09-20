@@ -30,7 +30,6 @@ if (process.env.Node_ENV !== 'production') {
 app.locals.company = 'Road Kill Pizza'
 app.locals.errors = {} // errors & body added to avoid guard statements
 app.locals.body = {} // i.e. value=(body && body.name) vs. value=body.name
-app.locals.user = req.session.email
 
 // middlewares
 // This is the salt
