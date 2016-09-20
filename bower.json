@@ -1,7 +1,7 @@
 {
   "name": "more-express",
   "description": "",
-  "main": "touch server.js",
+  "main": "server.js",
   "authors": [
     "Brian Doane <brianmdoane@gmail.com>"
   ],
