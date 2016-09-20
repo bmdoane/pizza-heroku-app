@@ -3,6 +3,9 @@
 const express = require('express')
 // For post method - middleware for forms to parse bodies into objects
 const bodyParser = require('body-parser')
+const session = require('express-session')
+// Havbe this after session
+const RedisStore = require('connect-redis')(session)
 const chalk = require('chalk')
 const routes = require('./routes/') // same as ./routes/index.js
 const { connect } = require('./db/database')
@@ -23,11 +26,24 @@ if (process.env.Node_ENV !== 'production') {
 	app.locals.pretty = true	
 }
 
+// Send a variable to all files - local
 app.locals.company = 'Road Kill Pizza'
 app.locals.errors = {} // errors & body added to avoid guard statements
 app.locals.body = {} // i.e. value=(body && body.name) vs. value=body.name
+app.locals.user = req.session.email
 
 // middlewares
+// This is the salt
+app.use(session({
+	store: new RedisStore(),
+	secret: 'roadkillpizzasupersecretkey'
+}))
+
+app.use((req,res,next) => {
+	app.locals.email = req.session.email
+	next()
+})
+
 // User agents - using methods on req object
 app.use((req, res, next) => {
 	//console.log(req)
