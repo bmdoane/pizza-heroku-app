@@ -142,12 +142,18 @@ router.post('/register', ({ body: { email, password, confirmation } }, res, err)
   }
 })
 
-router.get('/logout', (req, res) => res.render('logout', {page: 'Logout'}))
+router.get('/logout', (req, res) => {
+  if (req.session.email) {
+    res.render('logout', { page: 'Logout'})
+  } else {
+    res.redirect('/login')
+  }
+})
 
 router.post('/logout', (req, res) => {
-  req.session.destroy((err) => {
+  req.session.destroy(err => {
     if (err) throw err
-    res.redirect('/login', { msg: 'You have successfully logged out'})
+    res.redirect('/login')
   })
 })
 
