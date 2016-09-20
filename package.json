@@ -2,7 +2,7 @@
   "name": "more-express",
   "version": "1.0.0",
   "description": "",
-  "main": "touch server.js",
+  "main": "server.js",
   "engines": {
     "node": "6"
   },
