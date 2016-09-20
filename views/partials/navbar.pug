@@ -11,9 +11,16 @@ nav.navbar.navbar-inverse.navbar-fixed-top
       ul.nav.navbar-nav
         li(class={ active: !page }) 
           a(href='/') Home
-        li(class={ active: page === 'About' })  
+        li(class={ active: page === 'About' })
           a(href='/about') About
-        li(class={ active: page === 'Contact' })  
+        li(class={ active: page === 'Contact' })
           a(href='/contact') Contact
         li(class={ active: page === 'Order' })
-          a(href='/order') Order          
+          a(href='/order') Order
+        if email
+          li: a(href='/logout') Logged in as #{email}
+        else
+          li(class={ active: page === 'Login' })
+            a(href='/login') Login
+          li(class={ active: page === 'Register' })
+            a(href='/register') Register
