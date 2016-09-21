@@ -11,90 +11,23 @@ const Topping = require('../models/topping')
 const User = require('../models/user')
 
 const contact = require('./contact')
+const login = require('./login')
+const register = require('./register')
+const home = require('./home')
+const about = require('./about')
 
-router.get('/', (req, res) =>
-  res.render('index')
-)
 
-router.get('/about', (req, res) =>
-  res.render('about', { page: 'About' })
-)
+router.use(home)
+
+router.use(about)
 
 router.use(contact)
 
-router.get('/login', (req, res) =>
-  res.render('login')
-)
+router.use(login)
 
-router.post('/login', ({ session, body: { email, password } }, res, err) => {
-  User.findOne({ email })
-    .then(user => {
-      if (user) {
-        return new Promise((resolve, reject) => {
-          bcrypt.compare(password, user.password, (err, matches) => {
-            if (err) {
-              reject(err)
-            } else {
-              resolve(matches)
-            }
-          })
-        })
-      } else {
-        res.render('login', { msg: 'Email does not exist in our system' })
-      }
-    })
-    .then((matches) => {
-      if (matches) {
-        session.email = email
-        res.redirect('/')
-      } else {
-        res.render('login', { msg: 'Password does not match' })
-      }
-    })
-    .catch(err)
-})
+router.use(register)
 
-router.get('/register', (req, res) =>
-  res.render('register')
-)
 
-// Works - initial post code
-// router.post('/register', (req, res, next) => {
-//   bcrypt.hash(req.body.password, 10, (err, hash) => {
-//     User 
-//       .create({ email: req.body.email, password: hash })
-//       .then(() => res.redirect('/'))
-//       .catch(err => next(err))
-//   })
-// })
-
-// Returns from form
-router.post('/register', ({ body: { email, password, confirmation } }, res, err) => {
-  if (password === confirmation) {
-    User.findOne({ email })
-      .then(user => {
-        if (user) {
-          res.render('register', { msg: 'Email is already registered' })
-        } else {
-          return new Promise((resolve, reject) => {
-            // Fat arrow did not work here
-            bcrypt.hash(password, 13, function(err, hash) {
-              if (err) {
-                reject(err)
-              } else {
-                resolve(hash)
-              }
-            })
-          })
-        }
-      })
-      .then(hash => User.create({ email, password: hash }))
-      .then(() => res.redirect('/login'))
-      .catch(err)
-  } else {
-    res.render('register', { msg: 'Password & password confirmation do not match' })
-  }
-})
 
 router.post('/logout', (req, res) => {
   req.session.destroy(err => {
