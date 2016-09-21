@@ -20,6 +20,7 @@ const app = express()
 const port = process.env.PORT || 3000
 app.set('port', port)
 
+// Pug config
 app.set('view engine', 'pug')
 
 if (process.env.Node_ENV !== 'production') {
@@ -34,7 +35,9 @@ app.locals.body = {} // i.e. value=(body && body.name) vs. value=body.name
 // middlewares
 // This is the salt
 app.use(session({
-	store: new RedisStore(),
+	store: new RedisStore({
+		url: process.env.REDIS_URL || 'redis://localhost:6379'
+	}),
 	secret: 'roadkillpizzasupersecretkey'
 }))
 
@@ -62,6 +65,7 @@ app.use((req, res) => {
 	res.render('404')
 })
 
+// CAN ADD SCOTT"S ERROR HANDLING MIDDLEWARE HERE
 app.use((err, req, res, next) => {
 	//console.log(res)
 	res.sendStatus(err.status || 500)
