@@ -134,8 +134,9 @@ router.get('/order', (req, res, err) =>
 )
 
 router.post('/order', (req, res, err) => {
+  console.log("req.body", req.body);
   Order
-    .create(body)
+    .create(req.body)
     .then(() => res.redirect('/'))
     .catch(({ errors })  =>
       Promise.all([ // retrieve sizes and toppings again,
