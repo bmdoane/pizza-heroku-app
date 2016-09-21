@@ -3,9 +3,10 @@
 const { Router } = require('express')
 const bcrypt = require('bcrypt')
 
+const User = require('../models/user')
+
 const router = Router()
 
-const User = require('../models/user')
 
 router.get('/register', (req, res) =>
   res.render('register')
